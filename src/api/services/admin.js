@@ -20,6 +20,13 @@ module.exports = {
     }
     return false;
   },
+  adminGetUsers: async () => {
+    const allUsers = await User.find({}, { name: 1, email: 1, gender: 1, createdAt: 1 })
+    if (allUsers) {
+      return allUsers;
+    }
+    return false;
+  },
   getUserCount: async () => {
     let count = await User.countDocuments();
     if (count) {

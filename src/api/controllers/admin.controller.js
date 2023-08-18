@@ -41,7 +41,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc get all users
+// @desc get limited users
 // @route GET /api/admin/users
 // @access private
 const getAllusers = asyncHandler(async (req, res) => {
@@ -49,7 +49,6 @@ const getAllusers = asyncHandler(async (req, res) => {
   const sortBy = req.query.sortBy || 'name';
   const filterBy = req.query.filterBy || null;
 
-  console.log(sortBy, filterBy)
   const sortOptions = {};
   sortOptions[sortBy] = 1;
   let skip = (page - 1) * 5;
@@ -67,16 +66,11 @@ const getAllusers = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc get single User
-// @route GET /api/admin/users/:id
+// @desc get all users
+// @route GET /api/admin/all-users
 // @access private
-const AdminGetUser = asyncHandler(async (req, res) => {
-  const userId = req.params.id;
-  if (!userId) {
-    res.status(400);
-    throw new Error('Invalid userId');
-  }
-  const userData = await adminService.AdminGetUser(userId);
+const adminGetUsers = asyncHandler(async (req, res) => {
+  const userData = await adminService.adminGetUsers();
   if (userData) {
     res.status(200).json(userData);
   } else {
@@ -85,8 +79,10 @@ const AdminGetUser = asyncHandler(async (req, res) => {
   }
 });
 
+
+
 module.exports = {
   loginAdmin,
   getAllusers,
-  AdminGetUser,
+  adminGetUsers,
 };

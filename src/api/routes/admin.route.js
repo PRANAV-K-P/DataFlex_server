@@ -8,12 +8,7 @@ router.post('/login', controller.loginAdmin);
 
 router.get('/users', validateAdminToken, controller.getAllusers);
 
-// router.put('/users/:id', validateAdminToken, controller.manageUserAccess);
+router.get('/all-users', validateAdminToken, controller.adminGetUsers);
 
-// router.get('/users/:id', validateAdminToken, controller.AdminGetUser);
-
-// router.get('/users/search/:id', validateAdminToken, controller.searchInUsers);
-
-// router.get('/user-count', validateAdminToken, controller.getUserCount);
 
 module.exports = router;
